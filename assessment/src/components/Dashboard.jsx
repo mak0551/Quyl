@@ -1,5 +1,5 @@
-import React from 'react';
-import { Search, HelpCircle, MessageSquare, Bell } from 'lucide-react';
+import React from "react";
+import { Search, HelpCircle, MessageSquare, Bell } from "lucide-react";
 
 const StudentDashboard = () => {
   const students = [
@@ -9,7 +9,7 @@ const StudentDashboard = () => {
       courses: ["CBSE 9 Science", "CBSE 9 Math"],
       dateJoined: "17. Nov. 2024",
       lastLogin: "17. Nov. 2024 4:16 PM",
-      status: "active"
+      status: "active",
     },
     // Add more student data as needed
   ];
@@ -19,29 +19,44 @@ const StudentDashboard = () => {
       {/* Sidebar */}
       <div className="w-64 bg-white border-r">
         <div className="p-4">
-          <img src="/api/placeholder/100/40" alt="Quyl Logo" className="mb-6" />
-          
+          <img src="/public/Vector.png" alt="Quyl Logo" className="mb-6" />
+
           <div className="space-y-2">
-            <div className="flex items-center p-2 bg-gray-100 rounded">
-              <span className="text-sm font-medium">Mukesh Kumar</span>
+            <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
+              <span className="text-sm font-medium flex gap-2">
+                <img src="/public/dashboard.png" className="h-5.5" alt="" />
+                Dashboard
+              </span>
             </div>
-            <div className="flex items-center p-2 text-gray-700">
-              <span className="text-sm font-medium">Dashboard</span>
+            <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
+              <span className="text-sm font-medium flex gap-2">
+                <img src="/public/student.png" className="h-5.5" alt="" />
+                Students
+              </span>
             </div>
-            <div className="flex items-center p-2 bg-gray-100 rounded">
-              <span className="text-sm font-medium">Students</span>
+            <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
+            <span className="text-sm font-medium flex gap-2">
+                <img src="/public/chapter.png" className="h-5.5" alt="" />
+                Chapter
+              </span>
             </div>
-            <div className="flex items-center p-2 text-gray-700">
-              <span className="text-sm font-medium">Chapter</span>
+            <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
+              <span className="text-sm font-medium flex gap-2">
+                <img src="/public/help.png" className="h-5.5" alt="" />
+                Help
+              </span>
             </div>
-            <div className="flex items-center p-2 text-gray-700">
-              <span className="text-sm font-medium">Help</span>
+            <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
+              <span className="text-sm font-medium flex gap-2">
+                <img src="/public/reports.png" className="h-5.5" alt="" />
+                Reports
+              </span>
             </div>
-            <div className="flex items-center p-2 text-gray-700">
-              <span className="text-sm font-medium">Reports</span>
-            </div>
-            <div className="flex items-center p-2 text-gray-700">
-              <span className="text-sm font-medium">Settings</span>
+            <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
+              <span className="text-sm font-medium flex gap-2">
+                <img src="/public/setting.png" className="h-5.5" alt="" />
+                Settings
+              </span>
             </div>
           </div>
         </div>
@@ -65,9 +80,10 @@ const StudentDashboard = () => {
             <div className="flex items-center space-x-4">
               <HelpCircle className="h-6 w-6 text-gray-500" />
               <MessageSquare className="h-6 w-6 text-gray-500" />
+              <img src="/public/filter.png" alt="" />
               <Bell className="h-6 w-6 text-gray-500" />
               <img
-                src="/api/placeholder/40/40"
+                src="/public/user.png"
                 alt="Profile"
                 className="w-8 h-8 rounded-full"
               />
@@ -120,9 +136,13 @@ const StudentDashboard = () => {
                     <td className="p-4">{student.dateJoined}</td>
                     <td className="p-4">{student.lastLogin}</td>
                     <td className="p-4">
-                      <div className={`w-3 h-3 rounded-full ${
-                        student.status === 'active' ? 'bg-green-500' : 'bg-red-500'
-                      }`}></div>
+                      <div
+                        className={`w-3 h-3 rounded-full ${
+                          student.status === "active"
+                            ? "bg-green-500"
+                            : "bg-red-500"
+                        }`}
+                      ></div>
                     </td>
                   </tr>
                 ))}
