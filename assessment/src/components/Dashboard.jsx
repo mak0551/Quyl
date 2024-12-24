@@ -35,7 +35,7 @@ const StudentDashboard = () => {
               </span>
             </div>
             <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
-            <span className="text-sm font-medium flex gap-2">
+              <span className="text-sm font-medium flex gap-2">
                 <img src="/public/chapter.png" className="h-5.5" alt="" />
                 Chapter
               </span>
@@ -93,7 +93,7 @@ const StudentDashboard = () => {
         </div>
 
         {/* Filters */}
-        <div className="p-4">
+        <div className="p-4 flex justify-between items-center">
           <div className="flex space-x-4">
             <select className="border rounded-md px-3 py-1">
               <option>AY 2024-25</option>
@@ -101,6 +101,11 @@ const StudentDashboard = () => {
             <select className="border rounded-md px-3 py-1">
               <option>CBSE 9</option>
             </select>
+          </div>
+          <div>
+            <button className="border rounded-md px-3 py-1 bg-zinc-200">
+              <span className="font-black">+</span> Add New Student
+            </button>
           </div>
         </div>
 
