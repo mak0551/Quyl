@@ -2,10 +2,10 @@ import React from "react";
 import StudentDashboard from "./components/Dashboard.jsx";
 import Signup from "./pages/Signup.jsx";
 
-import { app } from "../firebase.js"; // importing the app from firebase.js
-import { getDatabase, ref, set } from "firebase/database"; // to setdata into the database
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // for auth
-import { Signin } from "./pages/Signin.jsx";
+// import { app } from "../firebase.js"; // importing the app from firebase.js
+// import { getDatabase, ref, set } from "firebase/database"; // to setdata into the database
+// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // for auth
+// import { Signin } from "./pages/Signin.jsx";
 
 // const db = getDatabase(app); // creating database instance
 // const auth = getAuth(app); // creating auth instance
@@ -39,7 +39,7 @@ function App() {
       {/*when you click the above buttom in firebase authentication tab then in user tab you can see the user is created*/}
 
       <Signup />
-      <Signin/>
+      {/* <Signin/> */}
     </div>
   );
 }
