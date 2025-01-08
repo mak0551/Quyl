@@ -19,42 +19,42 @@ const StudentDashboard = () => {
       {/* Sidebar */}
       <div className="w-64 bg-white border-r">
         <div className="p-4">
-          <img src="/public/Vector.png" alt="Quyl Logo" className="mb-6" />
+          <img src="/Vector.png" alt="Quyl Logo" className="mb-6" />
 
           <div className="space-y-2">
             <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
               <span className="text-sm font-medium flex gap-2">
-                <img src="/public/dashboard.png" className="h-5.5" alt="" />
+                <img src="/dashboard.png" className="h-5.5" alt="" />
                 Dashboard
               </span>
             </div>
             <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
               <span className="text-sm font-medium flex gap-2">
-                <img src="/public/student.png" className="h-5.5" alt="" />
+                <img src="/student.png" className="h-5.5" alt="" />
                 Students
               </span>
             </div>
             <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
               <span className="text-sm font-medium flex gap-2">
-                <img src="/public/chapter.png" className="h-5.5" alt="" />
+                <img src="/chapter.png" className="h-5.5" alt="" />
                 Chapter
               </span>
             </div>
             <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
               <span className="text-sm font-medium flex gap-2">
-                <img src="/public/help.png" className="h-5.5" alt="" />
+                <img src="/help.png" className="h-5.5" alt="" />
                 Help
               </span>
             </div>
             <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
               <span className="text-sm font-medium flex gap-2">
-                <img src="/public/reports.png" className="h-5.5" alt="" />
+                <img src="/reports.png" className="h-5.5" alt="" />
                 Reports
               </span>
             </div>
             <div className="flex items-center p-2 text-gray-700 hover:bg-gray-100 rounded">
               <span className="text-sm font-medium flex gap-2">
-                <img src="/public/setting.png" className="h-5.5" alt="" />
+                <img src="/setting.png" className="h-5.5" alt="" />
                 Settings
               </span>
             </div>
@@ -80,10 +80,10 @@ const StudentDashboard = () => {
             <div className="flex items-center space-x-4">
               <HelpCircle className="h-6 w-6 text-gray-500" />
               <MessageSquare className="h-6 w-6 text-gray-500" />
-              <img src="/public/filter.png" alt="" />
+              <img src="/filter.png" alt="" />
               <Bell className="h-6 w-6 text-gray-500" />
               <img
-                src="/public/user.png"
+                src="/user.png"
                 alt="Profile"
                 className="w-8 h-8 rounded-full"
               />
