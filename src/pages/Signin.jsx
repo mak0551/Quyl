@@ -33,6 +33,14 @@ export const Signin = () => {
       <button onClick={loginUser} className="submit">
         submit
       </button>
+      <br />
+      <button
+        onClick={() =>
+          firebase.putdata("user/" + "mak" , { email, password })
+        }
+      >
+        add user data
+      </button>
     </div>
   );
 };
