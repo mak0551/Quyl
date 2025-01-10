@@ -11,6 +11,9 @@ export const Signin = () => {
   const loginUser = () => {
     return firebase.signinUserWithEmailAndPassword(email, password);
   };
+  const signupwithgoogle = () => {
+    return firebase.signinwithgoogle();
+  };
 
   return (
     <div className="signinpage">
@@ -35,12 +38,13 @@ export const Signin = () => {
       </button>
       <br />
       <button
-        onClick={() =>
-          firebase.putdata("user/" + "mak" , { email, password })
-        }
+        onClick={() => firebase.putdata("user/" + "mak", { email, password })}
       >
         add user data
       </button>
+      <br />
+      <br />
+      <button onClick={signupwithgoogle}>sign in with google</button>
     </div>
   );
 };
