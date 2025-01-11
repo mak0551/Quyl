@@ -14,6 +14,9 @@ export const Signin = () => {
   const signupwithgoogle = () => {
     return firebase.signinwithgoogle();
   };
+  const writeData = () => {
+    return firebase.writeData();
+  };
 
   return (
     <div className="signinpage">
@@ -45,6 +48,9 @@ export const Signin = () => {
       <br />
       <br />
       <button onClick={signupwithgoogle}>sign in with google</button>
+      <br />
+      <br />
+      <button onClick={writeData}>create collection</button>
     </div>
   );
 };

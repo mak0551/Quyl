@@ -19,7 +19,7 @@ function App() {
     });
   }, []);
 
-  const singout = () => {
+  const signout = () => {
     return signOut(firebaseAuth);
   };
 
@@ -36,7 +36,7 @@ function App() {
     <div className="flex justify-center items-center flex-col gap-8">
       <StudentDashboard />
       <h1>hello {user.email}</h1>
-      <button onClick={singout}>logout</button>
+      <button onClick={signout}>logout</button>
     </div>
   );
 }
