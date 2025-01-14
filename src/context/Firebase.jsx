@@ -70,6 +70,19 @@ export const FirebaseProvider = (props) => {
     console.log("result", result);
   };
 
+  const writeSubData = () => {
+    const result = addDoc(
+      collection(firestore, "cities/0maoowA7msajdH1z9G04/places"),
+      {
+        name: "charminar",
+        desc: "awesome description",
+      }
+    )
+      .then((e) => console.log(e, "response"))
+      .catch((err) => console.log(err, "error"));
+    console.log("result", result);
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -78,6 +91,7 @@ export const FirebaseProvider = (props) => {
         signinwithgoogle,
         putdata,
         writeData,
+        writeSubData
       }}
     >
       {props.children}
