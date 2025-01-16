@@ -20,6 +20,9 @@ export const Signin = () => {
   const writesubdata = () => {
     return firebase.writeSubData();
   };
+  const readData = () => {
+    return firebase.readDoc();
+  };
 
   return (
     <div className="signinpage">
@@ -57,6 +60,9 @@ export const Signin = () => {
       <br />
       <br />
       <button onClick={writesubdata}>create sub collection</button>
+      <br />
+      <br />
+      <button onClick={readData}>read collection data</button>
     </div>
   );
 };

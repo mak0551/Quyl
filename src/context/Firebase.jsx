@@ -8,7 +8,13 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { getDatabase, set, ref } from "firebase/database";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -60,6 +66,7 @@ export const FirebaseProvider = (props) => {
   // function for creating collection
   const writeData = async () => {
     const result = addDoc(collection(firestore, "cities"), {
+      // here addDOc is a keyword to add document and collection is used to give reference of the colllection
       name: "hyderabad",
       pincode: 500008,
       lat: 123,
@@ -70,6 +77,7 @@ export const FirebaseProvider = (props) => {
     console.log("result", result);
   };
 
+  // function for creating sub collection
   const writeSubData = () => {
     const result = addDoc(
       collection(firestore, "cities/0maoowA7msajdH1z9G04/places"),
@@ -83,6 +91,14 @@ export const FirebaseProvider = (props) => {
     console.log("result", result);
   };
 
+  // function to read doc
+  const readDoc = async () => {
+    const ref = doc(firestore, "cities", "0maoowA7msajdH1z9G04");
+    await getDoc(ref)
+      .then((e) => console.log(e.data(), "this is doc"))
+      .catch((err) => console.log(err, "error reading doc"));
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -91,7 +107,8 @@ export const FirebaseProvider = (props) => {
         signinwithgoogle,
         putdata,
         writeData,
-        writeSubData
+        writeSubData,
+        readDoc,
       }}
     >
       {props.children}
