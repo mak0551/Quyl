@@ -14,6 +14,9 @@ import {
   addDoc,
   getDoc,
   doc,
+  query,
+  where,
+  getDocs,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -99,6 +102,20 @@ export const FirebaseProvider = (props) => {
       .catch((err) => console.log(err, "error reading doc"));
   };
 
+  // query
+  const readDocWithQuery = async () => {
+    // here in this first we have to define the refernce means the collection name then a query for that collection then call the document, the result of the document could be more than one so we are doing forEach here
+    const ref = collection(firestore, "users");
+    const q = query(ref, where("male", "==", true));
+    await getDocs(q)
+      .then((e) => {
+        e.forEach((doc) => {
+          console.log(doc.data(), "fetched");
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -109,6 +126,7 @@ export const FirebaseProvider = (props) => {
         writeData,
         writeSubData,
         readDoc,
+        readDocWithQuery,
       }}
     >
       {props.children}
