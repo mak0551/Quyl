@@ -69,6 +69,7 @@ export const Signin = () => {
       <br />
       <br />
       <button onClick={readDataWithQuery}>read collection by query</button>
+      <br />
     </div>
   );
 };
