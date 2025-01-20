@@ -18,7 +18,7 @@ import {
   where,
   getDocs,
   updateDoc,
-  deleteField,
+  deleteDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -125,6 +125,12 @@ export const FirebaseProvider = (props) => {
     await updateDoc(docRef, { name: "delhi" });
   };
 
+  // delete
+  const deleteit = async () => {
+    const docRef = doc(firestore, "cities", "RcAhCi3BNrwQ2OkquRyp");
+    await deleteDoc(docRef);
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -137,6 +143,7 @@ export const FirebaseProvider = (props) => {
         readDoc,
         readDocWithQuery,
         update,
+        deleteit
       }}
     >
       {props.children}

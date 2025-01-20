@@ -29,6 +29,9 @@ export const Signin = () => {
   const updatedata = () => {
     return firebase.update();
   };
+  const deletedata = () => {
+    return firebase.deleteit();
+  };
 
   return (
     <div className="signinpage">
@@ -75,6 +78,9 @@ export const Signin = () => {
       <br />
       <br />
       <button onClick={updatedata}>update collection</button>
+      <br />
+      <br />
+      <button onClick={deletedata}>delete collection</button>
       <br />
     </div>
   );
