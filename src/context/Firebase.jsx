@@ -17,6 +17,8 @@ import {
   query,
   where,
   getDocs,
+  updateDoc,
+  deleteField,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -116,6 +118,13 @@ export const FirebaseProvider = (props) => {
       .catch((err) => console.log(err));
   };
 
+  // update
+  const update = async () => {
+    // here we are first creating reference then by using that reference updating the doc
+    const docRef = doc(firestore, "cities", "RcAhCi3BNrwQ2OkquRyp");
+    await updateDoc(docRef, { name: "delhi" });
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -127,6 +136,7 @@ export const FirebaseProvider = (props) => {
         writeSubData,
         readDoc,
         readDocWithQuery,
+        update,
       }}
     >
       {props.children}

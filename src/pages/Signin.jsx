@@ -26,6 +26,9 @@ export const Signin = () => {
   const readDataWithQuery = () => {
     return firebase.readDocWithQuery();
   };
+  const updatedata = () => {
+    return firebase.update();
+  };
 
   return (
     <div className="signinpage">
@@ -69,6 +72,9 @@ export const Signin = () => {
       <br />
       <br />
       <button onClick={readDataWithQuery}>read collection by query</button>
+      <br />
+      <br />
+      <button onClick={updatedata}>update collection</button>
       <br />
     </div>
   );
