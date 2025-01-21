@@ -81,7 +81,7 @@ export const Signin = () => {
       <br />
       <br />
       <button onClick={deletedata}>delete collection</button>
-      <br />
+      
     </div>
   );
 };
