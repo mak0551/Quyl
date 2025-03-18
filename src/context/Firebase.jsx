@@ -1,4 +1,4 @@
-import { useContext, createContext } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -44,6 +44,12 @@ export const firebaseHook = () => useContext(FirebaseContext);
 
 // firebase provider function to wrap App.jsx in this
 export const FirebaseProvider = (props) => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const getuser = JSON.parse(localStorage.getItem("user"));
+    setUser(getuser);
+  }, []);
+
   // function for signup
   const signUpUserWithEmailAndPassword = (email, password) => {
     return createUserWithEmailAndPassword(firebaseAuth, email, password);
@@ -55,11 +61,16 @@ export const FirebaseProvider = (props) => {
   };
 
   // function for sign in with google
-  const signinwithgoogle = async () => {
+  const signinwithgoogle = async (onSuccess) => {
     try {
       const result = await signInWithPopup(firebaseAuth, googleProvider);
       const user = result.user;
-      console.log("Google Sign-In successful:", user);
+      localStorage.setItem("user", JSON.stringify(user));
+      // const getdata = JSON.parse(localStorage.getItem("user"));
+      // console.log("Google Sign-In successful:", getdata);
+      if (onSuccess) { // this represents the callback whatever we are sending to signinwithgoogle
+        onSuccess();
+      }
     } catch (error) {
       console.error("Google Sign-In error:", error);
     }
@@ -143,7 +154,8 @@ export const FirebaseProvider = (props) => {
         readDoc,
         readDocWithQuery,
         update,
-        deleteit
+        deleteit,
+        user,
       }}
     >
       {props.children}

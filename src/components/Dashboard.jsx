@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Search, HelpCircle, MessageSquare, Bell } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "../context/Firebase";
 
 const StudentDashboard = () => {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    onAuthStateChanged(firebaseAuth, (user) => {
+      if (user) {
+        console.log(user, "user signed in");
+        setUser(user);
+      } else {
+        navigate("/signin");
+        setUser(null);
+      }
+    });
+  }, []);
   const students = [
     {
       name: "Anshuman Kashyap",

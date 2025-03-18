@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { firebaseHook } from "../context/Firebase";
+import { useNavigate } from "react-router-dom";
 
 export const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const { user } = firebaseHook();
   const firebase = firebaseHook();
+  const navigate = useNavigate();
   console.log(firebase);
+
+  useEffect(() => {
+    if (user === null) return;
+    console.log(user, "jhkfdhkjhfjkdshfjkhfjd");
+  }, [user]);
 
   const loginUser = () => {
     return firebase.signinUserWithEmailAndPassword(email, password);
   };
   const signupwithgoogle = () => {
-    return firebase.signinwithgoogle();
+    return firebase.signinwithgoogle(() => navigate("/")); // here we are calling signinwithgoogle function and also give it a callback so after the execution of the signinwithgoogle function this call back will execute
   };
   const writeData = () => {
     return firebase.writeData();
@@ -81,7 +88,6 @@ export const Signin = () => {
       <br />
       <br />
       <button onClick={deletedata}>delete collection</button>
-      
     </div>
   );
 };
