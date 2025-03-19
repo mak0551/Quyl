@@ -10,7 +10,6 @@ function Signup() {
   const navigate = useNavigate();
 
   const firebase = firebaseHook();
-  console.log(firebase);
 
   const createUser = async () => {
     try {
@@ -19,7 +18,6 @@ function Signup() {
         password
       );
       const user = userCredential.user;
-      console.log(userCredential.user);
       await firebase.writeData(user.uid, email, name);
       navigate("/");
     } catch (error) {
