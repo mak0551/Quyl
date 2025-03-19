@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { firebaseHook } from "../../../context/Firebase";
 
 const AddStudentForm = ({ set }) => {
+  const firebase = firebaseHook();
+
   const [studentData, setStudentData] = useState({
     name: "",
     courses: [],
@@ -37,18 +40,22 @@ const AddStudentForm = ({ set }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Student Data:", studentData);
-    // Here you would typically send the data to an API
-    // Reset form after submission
-    setStudentData({
-      name: "",
-      courses: [],
-      dateJoined: "",
-      status: "active",
-      cohort: "",
-    });
+    try {
+      await firebase.addStudent(studentData);
+      setStudentData({
+        name: "",
+        courses: [],
+        dateJoined: "",
+        status: "active",
+        cohort: "",
+      });
+
+      alert("Student added successfully!");
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   };
 
   return (

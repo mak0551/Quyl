@@ -76,6 +76,19 @@ export const FirebaseProvider = (props) => {
     }
   };
 
+  //create student
+  const addStudent = async (studentData) => {
+    try {
+      const docRef = await addDoc(
+        collection(firestore, "students"),
+        studentData
+      );
+      return docRef;
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  };
+
   // function for put data
   const putdata = (key, data) => set(ref(firebaseDatabase, key), data);
   // <button
@@ -174,6 +187,7 @@ export const FirebaseProvider = (props) => {
         update,
         deleteit,
         user,
+        addStudent,
       }}
     >
       {props.children}
