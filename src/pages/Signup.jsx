@@ -18,15 +18,17 @@ function Signup() {
         password
       );
       const user = userCredential.user;
-      await firebase.writeData(user.uid, email, name);
-      navigate("/");
+      await firebase
+        .writeData(user.uid, email, name)
+        .then(() => navigate("/"))
+        .catch((err) => console.log(err));
     } catch (error) {
       console.error("Error creating user:", error.message);
     }
   };
 
   const signupwithgoogle = () => {
-    // here we are passing a callback, after the completion of this signinwithgoogle function this callback execcutes
+    // here we are passing a callback, after the completion of this signinwithgoogle function this callback executes
     firebase.signinwithgoogle(() => {
       navigate("/"); // This is the function being passed as `onSuccess`
     });
@@ -76,7 +78,7 @@ function Signup() {
             className="bg-white border border-black rounded-xl px-4 flex items-center justify-center gap-1"
           >
             <FcGoogle />
-            <span className="text-sm pb-1">sign in with google</span>
+            <span className="text-sm pb-1">sign up with google</span>
           </button>
         </div>
       </div>

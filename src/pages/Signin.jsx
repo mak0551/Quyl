@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { firebaseHook } from "../context/Firebase";
 import { useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
 
 export const Signin = () => {
   const [email, setEmail] = useState("");
@@ -8,86 +9,61 @@ export const Signin = () => {
   const { user } = firebaseHook();
   const firebase = firebaseHook();
   const navigate = useNavigate();
-  console.log(firebase);
 
   useEffect(() => {
     if (user === null) return;
-    console.log(user, "jhkfdhkjhfjkdshfjkhfjd");
   }, [user]);
 
-  const loginUser = () => {
-    return firebase.signinUserWithEmailAndPassword(email, password);
+  const loginUser = async () => {
+    await firebase
+      .signinUserWithEmailAndPassword(email, password)
+      .then(() => navigate("/"))
+      .catch((err) => console.log(err));
   };
   const signupwithgoogle = () => {
-    return firebase.signinwithgoogle(() => navigate("/")); // here we are calling signinwithgoogle function and also give it a callback so after the execution of the signinwithgoogle function this call back will execute
-  };
-  const writeData = () => {
-    return firebase.writeData();
-  };
-  const writesubdata = () => {
-    return firebase.writeSubData();
-  };
-  const readData = () => {
-    return firebase.readDoc();
-  };
-  const readDataWithQuery = () => {
-    return firebase.readDocWithQuery();
-  };
-  const updatedata = () => {
-    return firebase.update();
-  };
-  const deletedata = () => {
-    return firebase.deleteit();
+    return firebase.signinwithgoogle(() => navigate("/")); // here we are calling signinwithgoogle function and also give it a callback so after the execution of the signinwithgoogle function this callback will execute
   };
 
   return (
-    <div className="signinpage">
-      <label>Email</label>
-      <input
-        type="email"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-        required
-        placeholder="enter your email"
-      />
-      <label>Password</label>
-      <input
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-        required
-        placeholder="enter your password"
-      />
-      <button onClick={loginUser} className="submit">
-        submit
-      </button>
-      <br />
-      <button
-        onClick={() => firebase.putdata("user/" + "mak", { email, password })}
-      >
-        add user data
-      </button>
-      <br />
-      <br />
-      <button onClick={signupwithgoogle}>sign in with google</button>
-      <br />
-      <br />
-      <button onClick={writeData}>create collection</button>
-      <br />
-      <br />
-      <button onClick={writesubdata}>create sub collection</button>
-      <br />
-      <br />
-      <button onClick={readData}>read collection data</button>
-      <br />
-      <br />
-      <button onClick={readDataWithQuery}>read collection by query</button>
-      <br />
-      <br />
-      <button onClick={updatedata}>update collection</button>
-      <br />
-      <br />
-      <button onClick={deletedata}>delete collection</button>
+    <div className="min-h-screen flex w-full items-center justify-center bg-sky-500">
+      <div className="relative w-full max-w-[20rem] h-[20rem] items-center justify-center flex flex-col bg-white px-[2rem] shadow-xl rounded-2xl">
+        <h1 className="absolute top-6 mb-4 text-center w-full text-lg font-semibold underline underline-offset-4">
+          Signin to dive in
+        </h1>
+        <div className="flex flex-col gap-3 px-4 w-full">
+          <input
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            required
+            placeholder="email"
+            className="border border-black px-2 py-1 rounded-sm text-sm"
+          />
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            required
+            placeholder="password"
+            className="border border-black px-2 py-1 rounded-sm text-sm"
+          />
+        </div>
+        <div className="flex gap-2 flex-col p-2 mt-4 px-4 w-full">
+          <button
+            onClick={loginUser}
+            className="bg-sky-500 text-white text-sm py-[2px] border-sky-500 border px-4 rounded-xl w-full "
+          >
+            Signin
+          </button>
+          <button
+            onClick={signupwithgoogle}
+            className="bg-white border border-black rounded-xl px-4 flex items-center justify-center gap-1"
+          >
+            <FcGoogle />
+            <span className="text-sm pb-1">sign in with google</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

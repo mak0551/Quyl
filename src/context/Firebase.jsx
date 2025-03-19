@@ -70,7 +70,7 @@ export const FirebaseProvider = (props) => {
       // const getdata = JSON.parse(localStorage.getItem("user"));
       // console.log("Google Sign-In successful:", getdata);
       if (onSuccess) {
-        // this represents the callback whatever we are sending to signinwithgoogle from createuser function in signup page
+        // this represents the callback whatever we are sending to signinwithgoogle from createuser function in signup/signin page
         onSuccess();
       }
     } catch (error) {
@@ -80,7 +80,12 @@ export const FirebaseProvider = (props) => {
 
   // function for put data
   const putdata = (key, data) => set(ref(firebaseDatabase, key), data);
-
+  // <button
+  //   onClick={() => putdata("user/" + "mak", { email, password })}
+  // >
+  //   add user data
+  // </button>;
+  
   // function for creating collection
   const writeData = async (userId, email, name) => {
     try {
