@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import StudentDashboard from "./components/Dashboard.jsx";
+import StudentDashboard from "./components/dashboard/Dashboard.jsx";
 import Signup from "./pages/Signup.jsx";
 import { Signin } from "./pages/Signin.jsx";
 import { onAuthStateChanged, signOut } from "firebase/auth";
