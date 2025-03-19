@@ -140,10 +140,25 @@ export const FirebaseProvider = (props) => {
 
   // function to read doc
   const readDoc = async () => {
-    const ref = doc(firestore, "cities", "0maoowA7msajdH1z9G04");
-    await getDoc(ref)
-      .then((e) => console.log(e.data(), "this is doc"))
-      .catch((err) => console.log(err, "error reading doc"));
+    try {
+      const querySnapshot = await getDocs(collection(firestore, "students"));
+      const students = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      console.log("Fetched Students:", students);
+      return students;
+      // this is for fetching single document
+      // const ref = doc(firestore, "students", "4jFbXIoUQzr49yyUXpxs");
+      // const docSnap = await getDoc(ref);
+      // if (docSnap.exists()) {
+      //   console.log(docSnap.data(), "this is doc");
+      // } else {
+      //   console.log("No such document!");
+      // }
+    } catch (err) {
+      console.error("Error reading document:", err);
+    }
   };
 
   // query

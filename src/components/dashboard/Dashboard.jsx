@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import { firebaseAuth } from "../../context/Firebase";
+import { firebaseAuth, firebaseHook } from "../../context/Firebase";
 import Header from "./components/Header";
 import Filters from "./components/Filters";
 import StudentTable from "./components/StudentTable";
@@ -9,7 +9,9 @@ import Sidebar from "./components/Sidebar";
 
 const StudentDashboard = () => {
   const [user, setUser] = useState(null);
+  const [students, setStudents] = useState([]);
   const navigate = useNavigate();
+  const firebase = firebaseHook();
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
@@ -21,16 +23,14 @@ const StudentDashboard = () => {
       }
     });
   }, []);
-  const students = [
-    {
-      name: "Anshuman Kashyap",
-      cohort: "AY 2024-25",
-      courses: ["CBSE 9 Science", "CBSE 9 Math"],
-      dateJoined: "17. Nov. 2024",
-      lastLogin: "17. Nov. 2024 4:16 PM",
-      status: "active",
-    },
-  ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const studentList = await firebase.readDoc();
+      setStudents(studentList);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="flex h-screen bg-gray-50">
