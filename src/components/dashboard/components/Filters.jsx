@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import AddStudentForm from "./AddStudentForm";
 
 const Filters = () => {
+  const [show, setShow] = useState(false);
+  const handleclose = () => setShow(false);
   return (
     <div className="p-4 flex justify-between items-center">
       <div className="flex space-x-4">
@@ -12,8 +15,17 @@ const Filters = () => {
         </select>
       </div>
       <div>
-        <button className="border rounded-md px-3 py-1 bg-zinc-200">
-          <span className="font-black">+</span> Add New Student
+        <button className="border rounded-md px-3 py-1 bg-sky-500 text-white">
+          <button onClick={() => setShow(!show)}>
+            <span className="font-black">+</span> Add New Student
+          </button>
+          <div
+            className={`${
+              show ? "" : "hidden"
+            } absolute inset-0 items-center justify-center bg-zinc-50 bg-opacity-65`}
+          >
+            <AddStudentForm set={handleclose} />
+          </div>
         </button>
       </div>
     </div>
