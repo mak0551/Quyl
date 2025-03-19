@@ -12,18 +12,30 @@ function Signup() {
   const firebase = firebaseHook();
   console.log(firebase);
 
-  const createUser = () => {
-    return firebase.signUpUserWithEmailAndPassword(email, password);
+  const createUser = async () => {
+    try {
+      const userCredential = await firebase.signUpUserWithEmailAndPassword(
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log(userCredential.user);
+      await firebase.writeData(user.uid, email, name);
+      navigate("/");
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+    }
   };
 
   const signupwithgoogle = () => {
+    // here we are passing a callback, after the completion of this signinwithgoogle function this callback execcutes
     firebase.signinwithgoogle(() => {
       navigate("/"); // This is the function being passed as `onSuccess`
     });
   };
 
   return (
-    <div className="min-h-screen flex w-full items-center justify-center bg-zinc-50">
+    <div className="min-h-screen flex w-full items-center justify-center bg-sky-500">
       <div className="relative w-full max-w-[20rem] h-[25rem] items-center justify-center flex flex-col bg-white px-[2rem] shadow-xl rounded-2xl">
         <h1 className="absolute top-10 mb-4 text-center w-full text-lg font-semibold underline underline-offset-4">
           Signup to dive in
@@ -57,7 +69,7 @@ function Signup() {
         <div className="flex gap-2 flex-col p-2 mt-4 px-4 w-full">
           <button
             onClick={createUser}
-            className="bg-sky-500 text-white text-sm py-[2px] border-sky-600 border px-4 rounded-xl w-full "
+            className="bg-sky-500 text-white text-sm py-[2px] border-sky-500 border px-4 rounded-xl w-full "
           >
             Signup
           </button>

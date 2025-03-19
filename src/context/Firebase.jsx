@@ -19,6 +19,7 @@ import {
   getDocs,
   updateDoc,
   deleteDoc,
+  setDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -68,7 +69,8 @@ export const FirebaseProvider = (props) => {
       localStorage.setItem("user", JSON.stringify(user));
       // const getdata = JSON.parse(localStorage.getItem("user"));
       // console.log("Google Sign-In successful:", getdata);
-      if (onSuccess) { // this represents the callback whatever we are sending to signinwithgoogle
+      if (onSuccess) {
+        // this represents the callback whatever we are sending to signinwithgoogle from createuser function in signup page
         onSuccess();
       }
     } catch (error) {
@@ -80,17 +82,30 @@ export const FirebaseProvider = (props) => {
   const putdata = (key, data) => set(ref(firebaseDatabase, key), data);
 
   // function for creating collection
-  const writeData = async () => {
-    const result = addDoc(collection(firestore, "cities"), {
-      // here addDOc is a keyword to add document and collection is used to give reference of the colllection
-      name: "hyderabad",
-      pincode: 500008,
-      lat: 123,
-      long: 1234,
-    })
-      .then((e) => console.log(e, "response"))
-      .catch((err) => console.log(err, "error")); // creating document using addDoc method in 1st argument giving the collection name and in second argument giving the actual data and it returns promise so make sure to use .then and .catch , this collection structure goes like collection > document > fields
-    console.log("result", result);
+  const writeData = async (userId, email, name) => {
+    try {
+      // Store user data in Firestore under "users" collection
+      await setDoc(doc(firestore, "users", userId), {
+        email: email,
+        name: name, // Replace with actual user input
+        createdAt: new Date(),
+      });
+
+      console.log("User data stored successfully!");
+    } catch (error) {
+      console.error("Error writing user data:", error.message);
+    }
+
+    // const result = addDoc(collection(firestore, "cities"), {
+    //   // here addDOc is a keyword to add document and collection is used to give reference of the colllection
+    //   name: "hyderabad bolte",
+    //   pincode: 500008,
+    //   lat: 123,
+    //   long: 1234,
+    // })
+    //   .then((e) => console.log(e, "response"))
+    //   .catch((err) => console.log(err, "error")); // creating document using addDoc method in 1st argument giving the collection name and in second argument giving the actual data and it returns promise so make sure to use .then and .catch , this collection structure goes like collection > document > fields
+    // console.log("result", result);
   };
 
   // function for creating sub collection
