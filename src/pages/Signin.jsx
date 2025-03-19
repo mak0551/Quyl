@@ -17,7 +17,10 @@ export const Signin = () => {
   const loginUser = async () => {
     await firebase
       .signinUserWithEmailAndPassword(email, password)
-      .then(() => navigate("/"))
+      .then(() => {
+        navigate("/");
+        localStorage.setItem("user", JSON.stringify(user));
+      })
       .catch((err) => console.log(err));
   };
   const signupwithgoogle = () => {

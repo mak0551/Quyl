@@ -67,8 +67,6 @@ export const FirebaseProvider = (props) => {
       const result = await signInWithPopup(firebaseAuth, googleProvider);
       const user = result.user;
       localStorage.setItem("user", JSON.stringify(user));
-      // const getdata = JSON.parse(localStorage.getItem("user"));
-      // console.log("Google Sign-In successful:", getdata);
       if (onSuccess) {
         // this represents the callback whatever we are sending to signinwithgoogle from createuser function in signup/signin page
         onSuccess();
@@ -85,7 +83,7 @@ export const FirebaseProvider = (props) => {
   // >
   //   add user data
   // </button>;
-  
+
   // function for creating collection
   const writeData = async (userId, email, name) => {
     try {

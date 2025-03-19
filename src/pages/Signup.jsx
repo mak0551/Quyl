@@ -18,6 +18,7 @@ function Signup() {
         password
       );
       const user = userCredential.user;
+      localStorage.setItem("user", JSON.stringify(user));
       await firebase
         .writeData(user.uid, email, name)
         .then(() => navigate("/"))
