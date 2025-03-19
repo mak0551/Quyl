@@ -55,7 +55,7 @@ const AddStudentForm = ({ set }) => {
     <div className="relative max-w-lg text-sm  mx-auto p-6 bg-white rounded-lg shadow-2xl mt-10">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Add New Student</h2>
       <RxCross2
-        className="absolute right-5 top-5 font-bold text-xl"
+        className="absolute right-5 top-5 font-bold text-xl cursor-pointer"
         onClick={set}
       />
 
@@ -73,6 +73,7 @@ const AddStudentForm = ({ set }) => {
             name="name"
             value={studentData.name}
             onChange={handleInputChange}
+            placeholder="Full Name"
             required
             className="mt-1 block rounded-md border border-black shadow-sm p-1 w-[67%]"
           />
@@ -88,7 +89,7 @@ const AddStudentForm = ({ set }) => {
                 value={courseInput}
                 onChange={(e) => setCourseInput(e.target.value)}
                 className="flex-1 rounded-md border border-black shadow-sm  p-1 "
-                placeholder="Enter course name"
+                placeholder="course name"
               />
               <button
                 type="button"
@@ -171,6 +172,7 @@ const AddStudentForm = ({ set }) => {
             name="cohort"
             value={studentData.cohort}
             onChange={handleInputChange}
+            placeholder="cohort"
             required
             className="mt-1 block w-[67%] rounded-md border border-black shadow-sm  p-1"
           />

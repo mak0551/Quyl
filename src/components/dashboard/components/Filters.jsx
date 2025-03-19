@@ -15,18 +15,19 @@ const Filters = () => {
         </select>
       </div>
       <div>
-        <button className="border rounded-md px-3 py-1 bg-sky-500 text-white">
-          <button onClick={() => setShow(!show)}>
-            <span className="font-black">+</span> Add New Student
-          </button>
-          <div
-            className={`${
-              show ? "" : "hidden"
-            } absolute inset-0 items-center justify-center bg-zinc-50 bg-opacity-65`}
-          >
-            <AddStudentForm set={handleclose} />
-          </div>
+        <button
+          className="rounded-md px-3 py-1 bg-sky-500 text-white"
+          onClick={() => setShow(!show)}
+        >
+          <span className="font-black">+</span> Add New Student
         </button>
+        <div
+          className={`${
+            show ? "inline" : "hidden"
+          } absolute inset-0 items-center justify-center bg-zinc-50 bg-opacity-65`}
+        >
+          <AddStudentForm set={handleclose} />
+        </div>
       </div>
     </div>
   );
