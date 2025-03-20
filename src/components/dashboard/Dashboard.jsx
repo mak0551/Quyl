@@ -10,6 +10,7 @@ import Sidebar from "./components/Sidebar";
 const StudentDashboard = () => {
   const [user, setUser] = useState(null);
   const [students, setStudents] = useState([]);
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const firebase = firebaseHook();
   useEffect(() => {
@@ -32,13 +33,21 @@ const StudentDashboard = () => {
     fetchData();
   }, [students]);
 
+  const searchInput = (e) => {
+    setSearch(e);
+  };
+
+  // useEffect(() => {
+  // console.log(search);
+  // }, [search]);
+
   return (
     <div className="flex h-screen bg-gray-50">
       <Sidebar />
       <div className="flex-1">
-        <Header />
+        <Header input={searchInput} />
         <Filters />
-        <StudentTable students={students} />
+        <StudentTable students={students} search={search} />
       </div>
     </div>
   );
