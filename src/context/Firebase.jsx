@@ -146,7 +146,6 @@ export const FirebaseProvider = (props) => {
         id: doc.id,
         ...doc.data(),
       }));
-      console.log("Fetched Students:", students);
       return students;
       // this is for fetching single document
       // const ref = doc(firestore, "students", "4jFbXIoUQzr49yyUXpxs");

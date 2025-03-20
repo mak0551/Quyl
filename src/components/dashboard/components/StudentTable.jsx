@@ -11,7 +11,7 @@ const StudentTable = ({ students }) => {
               <th className="text-left p-4">Cohort</th>
               <th className="text-left p-4">Courses</th>
               <th className="text-left p-4">Date Joined</th>
-              <th className="text-left p-4">Last Login</th>
+              {/* <th className="text-left p-4">Last Login</th> */}
               <th className="text-left p-4">Status</th>
             </tr>
           </thead>
@@ -31,11 +31,13 @@ const StudentTable = ({ students }) => {
                   </div>
                 </td>
                 <td className="p-4">{student.dateJoined}</td>
-                <td className="p-4">{student.lastLogin}</td>
+                {/* <td className="p-4">{student.lastLogin}</td> */}
                 <td className="p-4">
                   <div
                     className={`w-3 h-3 rounded-full ${
-                      student.status === "active" ? "bg-green-500" : "bg-red-500"
+                      student.status === "active"
+                        ? "bg-green-500"
+                        : "bg-red-500"
                     }`}
                   ></div>
                 </td>

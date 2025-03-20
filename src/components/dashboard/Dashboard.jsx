@@ -15,7 +15,7 @@ const StudentDashboard = () => {
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
-        console.log(user, "user signed in");
+        // console.log(user, "user signed in");
         setUser(user);
       } else {
         navigate("/signin");
@@ -30,7 +30,7 @@ const StudentDashboard = () => {
       setStudents(studentList);
     };
     fetchData();
-  }, []);
+  }, [students]);
 
   return (
     <div className="flex h-screen bg-gray-50">

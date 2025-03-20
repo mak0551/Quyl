@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { firebaseHook } from "../../../context/Firebase";
+import { toast } from "react-toastify";
 
 const AddStudentForm = ({ set }) => {
   const firebase = firebaseHook();
@@ -51,8 +52,8 @@ const AddStudentForm = ({ set }) => {
         status: "active",
         cohort: "",
       });
-
-      alert("Student added successfully!");
+      set(false);
+      toast.success("student added successfully");
     } catch (error) {
       console.error("Error adding document: ", error);
     }
