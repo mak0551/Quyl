@@ -16,7 +16,6 @@ const StudentDashboard = () => {
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
-        // console.log(user, "user signed in");
         setUser(user);
       } else {
         navigate("/signin");
@@ -36,10 +35,6 @@ const StudentDashboard = () => {
   const searchInput = (e) => {
     setSearch(e);
   };
-
-  // useEffect(() => {
-  // console.log(search);
-  // }, [search]);
 
   return (
     <div className="flex h-screen bg-gray-50">

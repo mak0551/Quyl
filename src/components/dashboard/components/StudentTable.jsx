@@ -19,6 +19,7 @@ const StudentTable = ({ students, search }) => {
               <th className="text-left p-4">Date Joined</th>
               {/* <th className="text-left p-4">Last Login</th> */}
               <th className="text-left p-4">Status</th>
+              <th className="text-left p-4">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -48,6 +49,7 @@ const StudentTable = ({ students, search }) => {
                       }`}
                     ></div>
                   </td>
+                  <td className="px-4 pb-2 text-lg text-center">...</td>
                 </tr>
               ))
             ) : (

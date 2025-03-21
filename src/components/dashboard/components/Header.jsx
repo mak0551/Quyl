@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Search, HelpCircle, MessageSquare, Bell } from "lucide-react";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "../../../context/Firebase";
 
 const Header = ({ input }) => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    onAuthStateChanged(firebaseAuth, (user) => {
+      if (user) {
+        setUser(user.displayName);
+      }
+    });
+  }, []);
+
   const handleSearch = (e) => {
     input(e.target.value);
   };
@@ -25,7 +36,7 @@ const Header = ({ input }) => {
           <img src="/filter.png" alt="" />
           <Bell className="h-6 w-6 text-gray-500" />
           <img src="/user.png" alt="Profile" className="w-8 h-8 rounded-full" />
-          <span className="font-medium">Adeline H. Dancy</span>
+          <span className="font-medium">{user}</span>
         </div>
       </div>
     </div>
