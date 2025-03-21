@@ -76,37 +76,15 @@ export const FirebaseProvider = (props) => {
     }
   };
 
-  //create student
-  const addStudent = async (studentData) => {
-    try {
-      const docRef = await addDoc(
-        collection(firestore, "students"),
-        studentData
-      );
-      return docRef;
-    } catch (error) {
-      console.error("Error adding document: ", error);
-    }
-  };
-
-  // function for put data
-  const putdata = (key, data) => set(ref(firebaseDatabase, key), data);
-  // <button
-  //   onClick={() => putdata("user/" + "mak", { email, password })}
-  // >
-  //   add user data
-  // </button>;
-
-  // function for creating collection
+  // function for creating collection/document for user data
   const writeData = async (userId, email, name) => {
     try {
       // Store user data in Firestore under "users" collection
       await setDoc(doc(firestore, "users", userId), {
         email: email,
-        name: name, // Replace with actual user input
+        name: name,
         createdAt: new Date(),
       });
-
       console.log("User data stored successfully!");
     } catch (error) {
       console.error("Error writing user data:", error.message);
@@ -124,6 +102,56 @@ export const FirebaseProvider = (props) => {
     // console.log("result", result);
   };
 
+  // function to read doc
+  const readDoc = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(firestore, "students"));
+      const students = querySnapshot.docs.map((doc) => ({
+        id: doc.id, // we are seperately taking id because the doc.data() doesn't contains id
+        ...doc.data(),
+      }));
+      return students;
+
+      // this is for fetching single document
+      // const ref = doc(firestore, "students", "4jFbXIoUQzr49yyUXpxs");
+      // const docSnap = await getDoc(ref);
+      // if (docSnap.exists()) {
+      //   console.log(docSnap.data(), "this is doc");
+      // } else {
+      //   console.log("No such document!");
+      // }
+    } catch (err) {
+      console.error("Error reading document:", err);
+    }
+  };
+
+  //create student
+  const addStudent = async (studentData) => {
+    try {
+      const docRef = await addDoc(
+        collection(firestore, "students"),
+        studentData
+      );
+      return docRef;
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  };
+
+  // delete
+  const deleteit = async (id) => {
+    const docRef = doc(firestore, "students", id);
+    await deleteDoc(docRef);
+  };
+
+  // function for put data
+  const putdata = (key, data) => set(ref(firebaseDatabase, key), data);
+  // <button
+  //   onClick={() => putdata("user/" + "mak", { email, password })}
+  // >
+  //   add user data
+  // </button>;
+
   // function for creating sub collection
   const writeSubData = () => {
     const result = addDoc(
@@ -136,28 +164,6 @@ export const FirebaseProvider = (props) => {
       .then((e) => console.log(e, "response"))
       .catch((err) => console.log(err, "error"));
     console.log("result", result);
-  };
-
-  // function to read doc
-  const readDoc = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(firestore, "students"));
-      const students = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      return students;
-      // this is for fetching single document
-      // const ref = doc(firestore, "students", "4jFbXIoUQzr49yyUXpxs");
-      // const docSnap = await getDoc(ref);
-      // if (docSnap.exists()) {
-      //   console.log(docSnap.data(), "this is doc");
-      // } else {
-      //   console.log("No such document!");
-      // }
-    } catch (err) {
-      console.error("Error reading document:", err);
-    }
   };
 
   // query
@@ -179,12 +185,6 @@ export const FirebaseProvider = (props) => {
     // here we are first creating reference then by using that reference updating the doc
     const docRef = doc(firestore, "cities", "RcAhCi3BNrwQ2OkquRyp");
     await updateDoc(docRef, { name: "delhi" });
-  };
-
-  // delete
-  const deleteit = async () => {
-    const docRef = doc(firestore, "cities", "RcAhCi3BNrwQ2OkquRyp");
-    await deleteDoc(docRef);
   };
 
   return (

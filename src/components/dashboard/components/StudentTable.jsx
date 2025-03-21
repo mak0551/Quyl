@@ -1,12 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { firebaseHook } from "../../../context/Firebase";
+import { toast } from "react-toastify";
 
 const StudentTable = ({ students, search }) => {
+  const firebase = firebaseHook();
   const filterStudents =
     search.trim() === ""
       ? students
       : students.filter((student) =>
           student.name.toLowerCase().includes(search.toLowerCase())
         );
+
+  const handledelete = async (id) => {
+    try {
+      await firebase.deleteit(id);
+      toast.success("deleted successfully ");
+    } catch (error) {
+      toast.error("Error deleting student:");
+    }
+  };
+
   return (
     <div className="p-4">
       <div className="bg-white rounded-lg shadow">
@@ -49,7 +63,13 @@ const StudentTable = ({ students, search }) => {
                       }`}
                     ></div>
                   </td>
-                  <td className="px-4 pb-2 text-lg text-center">...</td>
+                  <td className="p-4 flex gap-2 justify-center">
+                    <MdOutlineModeEdit className="text-sky-600" />
+                    <MdDeleteOutline
+                      className="text-rose-600"
+                      onClick={() => handledelete(student.id)}
+                    />
+                  </td>
                 </tr>
               ))
             ) : (
