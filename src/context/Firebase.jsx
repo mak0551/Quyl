@@ -144,6 +144,12 @@ export const FirebaseProvider = (props) => {
     await deleteDoc(docRef);
   };
 
+  // update
+  const update = async (key, data) => {
+    const docRef = doc(firestore, "students", key);
+    await updateDoc(docRef, data);
+  };
+
   // function for put data
   const putdata = (key, data) => set(ref(firebaseDatabase, key), data);
   // <button
@@ -178,13 +184,6 @@ export const FirebaseProvider = (props) => {
         });
       })
       .catch((err) => console.log(err));
-  };
-
-  // update
-  const update = async () => {
-    // here we are first creating reference then by using that reference updating the doc
-    const docRef = doc(firestore, "cities", "RcAhCi3BNrwQ2OkquRyp");
-    await updateDoc(docRef, { name: "delhi" });
   };
 
   return (

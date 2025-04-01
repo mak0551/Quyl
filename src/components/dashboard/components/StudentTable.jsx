@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { firebaseHook } from "../../../context/Firebase";
 import { toast } from "react-toastify";
 
 const StudentTable = ({ students, search }) => {
   const firebase = firebaseHook();
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    cohort: "",
+    courses: [],
+    dateJoined: "",
+    status: "active",
+  });
+
   const filterStudents =
     search.trim() === ""
       ? students
@@ -19,6 +29,38 @@ const StudentTable = ({ students, search }) => {
     } catch (error) {
       toast.error("Error deleting student:");
     }
+  };
+
+  const handleEdit = (student) => {
+    setSelectedStudent(student);
+    setFormData({
+      name: student.name || "",
+      cohort: student.cohort || "",
+      courses: student.courses || "",
+      dateJoined: student.dateJoined || "",
+      status: student.status || "",
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleSubmitEdit = async (e) => {
+    e.preventDefault();
+    try {
+      await firebase.update(selectedStudent.id, formData);
+      toast.success("Student updated successfully");
+      setIsEditModalOpen(false);
+      setSelectedStudent(null);
+    } catch (error) {
+      toast.error("Error updating student: " + error.message);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   return (
@@ -64,7 +106,10 @@ const StudentTable = ({ students, search }) => {
                     ></div>
                   </td>
                   <td className="p-4 flex gap-2 justify-center">
-                    <MdOutlineModeEdit className="text-sky-600" />
+                    <MdOutlineModeEdit
+                      className="text-sky-600"
+                      onClick={() => handleEdit(student)}
+                    />
                     <MdDeleteOutline
                       className="text-rose-600"
                       onClick={() => handledelete(student.id)}
@@ -82,6 +127,65 @@ const StudentTable = ({ students, search }) => {
           </tbody>
         </table>
       </div>
+
+      {isEditModalOpen && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg w-96">
+            <h2 className="text-xl font-bold mb-4">Edit Student</h2>
+            <form onSubmit={handleSubmitEdit}>
+              <div className="mb-4">
+                <label className="block mb-1">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full border p-2 rounded"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1">Cohort</label>
+                <input
+                  type="text"
+                  name="cohort"
+                  value={formData.cohort}
+                  onChange={handleInputChange}
+                  className="w-full border p-2 rounded"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1">Status</label>
+                <select
+                  name="status"
+                  value={formData.status}
+                  onChange={handleInputChange}
+                  className="w-full border p-2 rounded"
+                >
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+              <div className="flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsEditModalOpen(false)}
+                  className="px-4 py-2 bg-gray-300 rounded"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-500 text-white rounded"
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
