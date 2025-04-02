@@ -107,11 +107,11 @@ const StudentTable = ({ students, search }) => {
                   </td>
                   <td className="p-4 flex gap-2 justify-center">
                     <MdOutlineModeEdit
-                      className="text-sky-600"
+                      className="text-sky-600 cursor-pointer"
                       onClick={() => handleEdit(student)}
                     />
                     <MdDeleteOutline
-                      className="text-rose-600"
+                      className="text-rose-600 cursor-pointer"
                       onClick={() => handledelete(student.id)}
                     />
                   </td>
@@ -129,8 +129,8 @@ const StudentTable = ({ students, search }) => {
       </div>
 
       {isEditModalOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg w-96">
+        <div className="absolute inset-0 items-center justify-center bg-zinc-50 bg-opacity-65">
+          <div className="max-w-lg text-sm  mx-auto p-6 bg-white rounded-lg shadow-2xl mt-10">
             <h2 className="text-xl font-bold mb-4">Edit Student</h2>
             <form onSubmit={handleSubmitEdit}>
               <div className="mb-4">
