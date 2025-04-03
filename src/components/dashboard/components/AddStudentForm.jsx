@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 
 const AddStudentForm = ({ set }) => {
   const firebase = firebaseHook();
-
   const [studentData, setStudentData] = useState({
     name: "",
     courses: [],
@@ -60,18 +59,20 @@ const AddStudentForm = ({ set }) => {
   };
 
   return (
-    <div className="relative max-w-lg text-sm  mx-auto p-6 bg-white rounded-lg shadow-2xl mt-10">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Add New Student</h2>
+    <div className="relative w-full max-w-lg mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-2xl mt-6 sm:mt-10">
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-800 text-center sm:text-left">
+        Add New Student
+      </h2>
       <RxCross2
-        className="absolute right-5 top-5 font-bold text-xl cursor-pointer"
+        className="absolute right-3 top-3 sm:right-5 sm:top-5 text-lg sm:text-xl cursor-pointer"
         onClick={set}
       />
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="flex w-full items-center px-2">
+      <form onSubmit={handleSubmit} className="space-y-4 ">
+        <div className="flex flex-col sm:flex-row sm:items-center px-2 gap-2 sm:gap-0">
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-gray-700 w-1/4 text-left"
+            className="block text-sm font-medium text-gray-700 sm:w-1/4 text-left"
           >
             Full Name
           </label>
@@ -83,42 +84,43 @@ const AddStudentForm = ({ set }) => {
             onChange={handleInputChange}
             placeholder="Full Name"
             required
-            className="mt-1 block rounded-md border border-black shadow-sm p-1 w-[67%]"
+            className="mt-1 block w-full sm:w-[67%] rounded-md border border-black shadow-sm p-1 "
           />
         </div>
-        <div className="flex flex-col w-full px-2">
-          <div className="w-full flex items-center">
-            <label className="block text-sm font-medium text-gray-700 w-1/4 text-left ">
+
+        <div className="flex flex-col px-2">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0">
+            <label className="block text-sm font-medium text-gray-700 sm:w-1/4 text-left">
               Courses
             </label>
-            <div className="mt-1 flex gap-2 w-[67%]">
+            <div className="mt-1 flex flex-col sm:flex-row gap-2 w-full sm:w-[67%]">
               <input
                 type="text"
                 value={courseInput}
                 onChange={(e) => setCourseInput(e.target.value)}
-                className="flex-1 rounded-md border border-black shadow-sm  p-1 "
+                className="flex-1 rounded-md border border-black shadow-sm p-1 "
                 placeholder="course name"
               />
               <button
                 type="button"
                 onClick={handleCourseAdd}
-                className="px-4 py-1 bg-sky-600 text-white rounded-md hover:bg-sky-700"
+                className="px-3 py-1 sm:px-4 sm:py-1 bg-sky-600 text-white rounded-md hover:bg-sky-700 whitespace-nowrap"
               >
                 Add
               </button>
             </div>
           </div>
-          <div className="mt-2 flex flex-wrap gap-2 justify-end">
+          <div className="mt-2 flex flex-wrap gap-2 justify-start sm:justify-end">
             {studentData.courses.map((course, index) => (
               <span
                 key={index}
-                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm bg-white text-black border- border-black"
+                className="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-xs sm:text-sm bg-white text-black border border-black"
               >
                 {course}
                 <button
                   type="button"
                   onClick={() => removeCourse(index)}
-                  className="ml-2 pt-[2px] text-base"
+                  className="ml-1 sm:ml-2 pt-[1px] sm:pt-[2px] text-sm sm:text-base"
                 >
                   <RxCross2 />
                 </button>
@@ -127,10 +129,10 @@ const AddStudentForm = ({ set }) => {
           </div>
         </div>
 
-        <div className="flex w-full items-center px-2">
+        <div className="flex flex-col sm:flex-row sm:items-center px-2 gap-2 sm:gap-0">
           <label
             htmlFor="dateJoined"
-            className="block text-sm font-medium text-gray-700 w-1/4 text-left"
+            className="block text-sm font-medium text-gray-700 sm:w-1/4 text-left"
           >
             Date Joined
           </label>
@@ -141,15 +143,14 @@ const AddStudentForm = ({ set }) => {
             value={studentData.dateJoined}
             onChange={handleInputChange}
             required
-            className="mt-1 block w-[67%] rounded-md border border-black shadow-sm p-1"
+            className="mt-1 block w-full sm:w-[67%] rounded-md border border-black shadow-sm p-1 "
           />
         </div>
 
-        {/* Status */}
-        <div className="flex w-full items-center px-2">
+        <div className="flex flex-col sm:flex-row sm:items-center px-2 gap-2 sm:gap-0">
           <label
             htmlFor="status"
-            className="block text-sm font-medium text-gray-700 w-1/4 text-left"
+            className="block text-sm font-medium text-gray-700 sm:w-1/4 text-left"
           >
             Status
           </label>
@@ -158,7 +159,7 @@ const AddStudentForm = ({ set }) => {
             name="status"
             value={studentData.status}
             onChange={handleInputChange}
-            className="mt-1 block w-[67%] rounded-md border border-black shadow-sm p-1"
+            className="mt-1 block w-full sm:w-[67%] rounded-md border border-black shadow-sm p-1 "
           >
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
@@ -166,11 +167,10 @@ const AddStudentForm = ({ set }) => {
           </select>
         </div>
 
-        {/* Cohort */}
-        <div className="flex w-full items-center px-2">
+        <div className="flex flex-col sm:flex-row sm:items-center px-2 gap-2 sm:gap-0">
           <label
             htmlFor="cohort"
-            className="block text-sm font-medium text-gray-700 w-1/4 text-left"
+            className="block text-sm font-medium text-gray-700 sm:w-1/4 text-left"
           >
             Cohort
           </label>
@@ -182,14 +182,14 @@ const AddStudentForm = ({ set }) => {
             onChange={handleInputChange}
             placeholder="cohort"
             required
-            className="mt-1 block w-[67%] rounded-md border border-black shadow-sm  p-1"
+            className="mt-1 block w-full sm:w-[67%] rounded-md border border-black shadow-sm p-1 "
           />
         </div>
 
         <div className="flex justify-center">
           <button
             type="submit"
-            className="px-6 py-1 bg-sky-500 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+            className="w-full sm:w-auto px-6 py-1 bg-sky-500 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
           >
             Add Student
           </button>
