@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import AddStudentForm from "./AddStudentForm";
 import { FaSortAmountDown } from "react-icons/fa";
 
-const Filters = () => {
+const Filters = ({ setSortOption }) => {
   const [show, setShow] = useState(false);
   const handleclose = () => setShow(false);
   return (
     <div className="p-4 flex justify-between items-center">
       <div className="flex items-center gap-2 ">
         <FaSortAmountDown />
-        <select className="border rounded-md px-3 py-1">
-          <option>CBSE 9</option>
+        <select
+          className="border rounded-md px-3 py-1"
+          onChange={(e) => setSortOption(e.target.value)}
+        >
+          <option value="name">Student Name</option>
+          <option value="dateJoined">Date Joined</option>
         </select>
       </div>
       <div>

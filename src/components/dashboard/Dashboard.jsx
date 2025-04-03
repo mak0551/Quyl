@@ -11,6 +11,7 @@ const StudentDashboard = () => {
   const [user, setUser] = useState(null);
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState("");
+  const [sortOption, setSortOption] = useState("name"); // Default sorting by name
   const navigate = useNavigate();
   const firebase = firebaseHook();
   useEffect(() => {
@@ -41,8 +42,12 @@ const StudentDashboard = () => {
       <Sidebar />
       <div className="flex-1">
         <Header input={searchInput} />
-        <Filters />
-        <StudentTable students={students} search={search} />
+        <Filters setSortOption={setSortOption} />
+        <StudentTable
+          students={students}
+          search={search}
+          sortOption={sortOption}
+        />
       </div>
     </div>
   );

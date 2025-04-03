@@ -3,7 +3,7 @@ import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { firebaseHook } from "../../../context/Firebase";
 import { toast } from "react-toastify";
 
-const StudentTable = ({ students, search }) => {
+const StudentTable = ({ students, search, sortOption }) => {
   const firebase = firebaseHook();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -15,12 +15,21 @@ const StudentTable = ({ students, search }) => {
     status: "active",
   });
 
-  const filterStudents =
+  let filterStudents =
     search.trim() === ""
       ? students
       : students.filter((student) =>
           student.name.toLowerCase().includes(search.toLowerCase())
         );
+
+  filterStudents = [...filterStudents].sort((a, b) => {
+    if (sortOption === "name") {
+      return a.name.localeCompare(b.name);
+    } else if (sortOption === "dateJoined") {
+      return new Date(a.dateJoined) - new Date(b.dateJoined);
+    }
+    return 0;
+  });
 
   const handledelete = async (id) => {
     try {
