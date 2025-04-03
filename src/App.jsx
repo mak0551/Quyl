@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="flex justify-start items-center flex-col min-h-screen">
-      <Router>
+      <Router basename="/">
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
