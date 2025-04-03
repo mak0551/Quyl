@@ -38,9 +38,9 @@ const StudentDashboard = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-fit bg-gray-50 overflow-hidden overflow-x-auto w-full">
       <Sidebar />
-      <div className="flex-1">
+      <div className="flex-1 sm:w-fit">
         <Header input={searchInput} />
         <Filters setSortOption={setSortOption} />
         <StudentTable

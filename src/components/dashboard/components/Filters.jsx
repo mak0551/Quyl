@@ -19,7 +19,7 @@ const Filters = ({ setSortOption }) => {
       </div>
       <div>
         <button
-          className="rounded-md px-3 py-1 bg-sky-500 text-white"
+          className="rounded-md px-3 py-1 bg-sky-500 text-white "
           onClick={() => setShow(!show)}
         >
           <span className="font-black">+</span> Add New Student

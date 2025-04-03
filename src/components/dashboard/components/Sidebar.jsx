@@ -11,7 +11,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="w-64 bg-white border-r">
+    <div className="w-64 bg-white border-r min-h-[80vh] px-8">
       <div className="p-4">
         <img src="/Vector.png" alt="Quyl Logo" className="mb-6" />
         <div className="space-y-2">

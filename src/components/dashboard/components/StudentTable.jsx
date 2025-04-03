@@ -75,7 +75,7 @@ const StudentTable = ({ students, search, sortOption }) => {
   return (
     <div className="p-4">
       <div className="bg-white rounded-lg shadow">
-        <table className="w-full">
+        <table className="w-fit">
           <thead>
             <tr className="border-b">
               <th className="text-left p-4">Student Name</th>
@@ -97,7 +97,7 @@ const StudentTable = ({ students, search, sortOption }) => {
                     <div className="flex space-x-2">
                       {student.courses.map((course, i) => (
                         <span key={i} className="flex items-center">
-                          <span className="w-6 h-6 bg-red-100 rounded-full mr-1"></span>
+                          <span className="w-4 h-4 bg-red-100 rounded-full mr-1"></span>
                           {course}
                         </span>
                       ))}

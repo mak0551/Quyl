@@ -17,7 +17,7 @@ const Header = ({ input }) => {
     input(e.target.value);
   };
   return (
-    <div className="p-4 border-b bg-white">
+    <div className="p-4 border-b bg-gray-50">
       <div className="flex items-center justify-between">
         <div className="flex-1 max-w-2xl">
           <div className="relative">
