@@ -9,10 +9,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const signout = () => {
-    localStorage.removeItem("user");
-    signOut(firebaseAuth);
-  };
+  // const signout = () => {
+  //   localStorage.removeItem("user");
+  //   signOut(firebaseAuth);
+  // };
 
   return (
     <div className="flex justify-start items-center flex-col min-h-screen">
