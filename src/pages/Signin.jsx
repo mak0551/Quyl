@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { firebaseHook } from "../context/Firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 
 export const Signin = () => {
@@ -66,6 +66,9 @@ export const Signin = () => {
             <span className="text-sm pb-1">sign in with google</span>
           </button>
         </div>
+        <span className="text-xs">
+          Don't have an account? <Link to={"/signup"} className="text-sky-500 font-semibold">Sign up</Link>
+        </span>
       </div>
     </div>
   );

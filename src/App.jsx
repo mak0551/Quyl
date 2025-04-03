@@ -15,7 +15,7 @@ function App() {
   };
 
   return (
-    <div className="flex justify-start items-center flex-col gap-8 min-h-screen p-2">
+    <div className="flex justify-start items-center flex-col min-h-screen">
       <Router>
         <Routes>
           <Route path="/signup" element={<Signup />} />

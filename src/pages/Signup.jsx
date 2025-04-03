@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { firebaseHook } from "../context/Firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 
 function Signup() {
@@ -82,6 +82,9 @@ function Signup() {
             <span className="text-sm pb-1">sign up with google</span>
           </button>
         </div>
+        <span className="text-xs">
+          Already have an account? <Link to={"/signin"} className="text-sky-500 font-semibold">Sign in</Link>
+        </span>
       </div>
     </div>
   );
